@@ -2,6 +2,7 @@
     <string name="app_name">Swapify</string>
     <string name="add_flight">Add Flight</string>
     <string name="current_flights">Current Flights</string>
+    <string name="action_settings">Settings</string>
 
     <!-- Strings related to login -->
     <!-- Sign-in status messages -->
@@ -26,4 +27,8 @@
 
     <!-- Rationale for asking for Contacts -->
     <string name="contacts_permission_rationale">Contacts access is needed in order to retrieve your email address.</string>
+    <string name="message_hint">Say anything</string>
+    <string name="send">Send</string>
+    <string name="profile_me">My Profile Pic</string>
+    <string name="profile_other">Other profile pic</string>
 </resources>

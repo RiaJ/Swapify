@@ -28,6 +28,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,14 +42,25 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 public class HomeActivity extends Activity implements
         View.OnClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+    //Parse credentials
+    public static final String SWAPIFY_APPLICATION_ID = "M0VgBIPclT0xQP1vVT2lDspJZCIl6pxbmuQ3Jzhq";
+    public static final String SWAPIFY_CLIENT_KEY = "HSqUBvUPlZUrpqFgbM90fpoEDkKzcSJ0OStQIny8";
 
     private static final String TAG = "HomeActivity";
+
+    private static String userId;
 
     /* RequestCode for resolutions involving sign-in */
     private static final int RC_SIGN_IN = 1;
@@ -77,6 +90,18 @@ public class HomeActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+        ParseObject.registerSubclass(Message.class);
+        Parse.initialize(this, SWAPIFY_APPLICATION_ID, SWAPIFY_CLIENT_KEY);
+
+        // User login
+        if (ParseUser.getCurrentUser() != null) { // start with existing user
+            startWithCurrentUser();
+        } else { // If not logged in, login as a new anonymous user
+            login();
+        }
 
         // Restore from saved instance state
         // [START restore_saved_instance_state]
@@ -110,6 +135,47 @@ public class HomeActivity extends Activity implements
                 .addScope(new Scope(Scopes.EMAIL))
                 .build();
         // [END create_google_api_client]
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_chat, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Get the userId from the cached currentUser object
+    private void startWithCurrentUser() {
+        userId = ParseUser.getCurrentUser().getObjectId();
+    }
+
+    // Create an anonymous user using ParseAnonymousUtils and set sUserId
+    private void login() {
+        ParseAnonymousUtils.logIn(new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (e != null) {
+                    Log.d(TAG, "Anonymous login failed: " + e.toString());
+                } else {
+                    startWithCurrentUser();
+                }
+            }
+        });
     }
 
     private void updateUI(boolean isSignedIn) {
