@@ -41,13 +41,13 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
-public class LoginActivity extends Activity implements
+public class HomeActivity extends Activity implements
         View.OnClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "HomeActivity";
 
     /* RequestCode for resolutions involving sign-in */
     private static final int RC_SIGN_IN = 1;
@@ -76,7 +76,7 @@ public class LoginActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_home);
 
         // Restore from saved instance state
         // [START restore_saved_instance_state]
@@ -169,7 +169,7 @@ public class LoginActivity extends Activity implements
                         @Override
                         public void onClick(View v) {
                             // Request the permission again.
-                            ActivityCompat.requestPermissions(LoginActivity.this,
+                            ActivityCompat.requestPermissions(HomeActivity.this,
                                     new String[]{perm},
                                     RC_PERM_GET_ACCOUNTS);
                         }

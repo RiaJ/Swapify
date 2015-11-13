@@ -6,7 +6,7 @@
     android:background="@drawable/login_background"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context="swapify.com.swapify.LoginActivity">
+    tools:context="swapify.com.swapify.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
