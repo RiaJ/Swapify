@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -45,12 +46,15 @@ public class HomeActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.VISIBLE);
             }
             @Override
             public void onCancel() {
+                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
             }
             @Override
             public void onError(FacebookException e) {
+                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
             }
         });
 

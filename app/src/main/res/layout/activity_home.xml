@@ -6,7 +6,7 @@
     android:background="@drawable/login_background"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context="swapify.com.swapify.HomeActivity">
+    tools:context="swapify.com.swapify.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +14,6 @@
         android:layout_weight="3"
         android:gravity="center"
         android:orientation="vertical">
-
-       <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp" />
 
         <LinearLayout
             android:id="@+id/add_flight_and_current_flights"
@@ -54,9 +48,8 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
         android:visibility="visible"
-        tools:visibility="gone" />
+        tools:visibility="gone"/>
 
 </LinearLayout>
