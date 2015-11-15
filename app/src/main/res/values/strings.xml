@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Swapify</string>
+    <string name="facebook_app_id">927834800603065</string>
+
     <string name="add_flight">Add Flight</string>
     <string name="current_flights">Current Flights</string>
     <string name="action_settings">Settings</string>
