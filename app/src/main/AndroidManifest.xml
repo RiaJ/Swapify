@@ -31,6 +31,14 @@
             android:name=".AddFlightActivity"
             android:label="@string/title_activity_add_flight" >
         </activity>
+        <activity
+            android:name=".FlightActivity"
+            android:label="@string/title_activity_flight" >
+        </activity>
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat" >
+        </activity>
     </application>
 
 </manifest>

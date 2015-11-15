@@ -52,21 +52,6 @@ public class HomeActivity extends Activity {
 
         // facebook login
         loginButton = (LoginButton)findViewById(R.id.login_button);
-//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.VISIBLE);
-//            }
-//            @Override
-//            public void onCancel() {
-//                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
-//            }
-//            @Override
-//            public void onError(FacebookException e) {
-//                findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
-//            }
-//        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +60,21 @@ public class HomeActivity extends Activity {
         });
 
         //TODO: Redirect to login if no user found
-//        // User login
-//        if (ParseUser.getCurrentUser() != null) { // start with existing user
-//            startWithCurrentUser();
-//        } else { // If not logged in, login as a new anonymous user
-//            login();
-//        }
+
+        findViewById(R.id.add_flight_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), AddFlightActivity.class);
+                startActivity(i);
+            }
+        });
+        findViewById(R.id.current_flights_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), FlightActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void onLoginButtonClicked() {
@@ -90,6 +84,7 @@ public class HomeActivity extends Activity {
             @Override
             public void done(final ParseUser user, ParseException err) {
                 if (user == null) {
+                    findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
                     //TODO: Create new parse user and push it to server
@@ -122,19 +117,14 @@ public class HomeActivity extends Activity {
 
                         }
                     }).executeAsync();
+
+                    findViewById(R.id.add_flight_and_current_flights).setVisibility(View.VISIBLE);
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
                 } else {
                     userId = ParseUser.getCurrentUser().getObjectId();
+                    findViewById(R.id.add_flight_and_current_flights).setVisibility(View.VISIBLE);
                     Log.d("MyApp", "User logged in through Facebook!");
                 }
-            }
-        });
-        
-        findViewById(R.id.add_flight_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), AddFlightActivity.class);
-                startActivity(i);
             }
         });
     }
