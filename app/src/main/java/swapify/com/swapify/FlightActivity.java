@@ -12,6 +12,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,12 +68,35 @@ public class FlightActivity extends Activity {
             public void done(List<FlightInfo> flightInfo, ParseException e) {
                 if (e == null) {
                     flightInfoArrayList.clear();
-                    flightInfoArrayList.addAll(flightInfo);
+                    flightInfoArrayList.addAll(filterFlightInfo(flightInfo, ParseUser.getCurrentUser().getObjectId()));
                     flightListAdapter.notifyDataSetChanged(); // update adapter
                 } else {
                     Log.d("message", "Error: " + e.getMessage());
                 }
             }
         });
+    }
+
+    private List<FlightInfo> filterFlightInfo(List<FlightInfo> flightInfoList, String userId) {
+        List<FlightInfo> filteredFlightInfo = new ArrayList<>();
+        for (int i = 0; i < flightInfoList.size(); i++) {
+            FlightInfo flightInfo = flightInfoList.get(i);
+            Log.d("flightno", flightInfo.getFlightNo());
+            Log.d("userId", userId);
+            List<List<String>> passengerInfo = flightInfo.getSeats();
+            Boolean userFound = false;
+            for (int j = 0; j < passengerInfo.size(); j++) {
+                if (passengerInfo.get(j).get(0).equals(userId)) {
+                    userFound = true;
+                    Log.d("userFound", userId);
+                    break;
+                }
+            }
+            if (userFound) {
+                filteredFlightInfo.add(flightInfoList.get(i));
+            }
+        }
+        Log.d("size filtered", Integer.toString(filteredFlightInfo.size()));
+        return filteredFlightInfo;
     }
 }
