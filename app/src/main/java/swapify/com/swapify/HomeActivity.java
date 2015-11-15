@@ -77,7 +77,7 @@ public class HomeActivity extends Activity {
                 Intent i = new Intent(v.getContext(), AddFlightActivity.class);
                 startActivity(i);
             }
-        }); 
+        });
     }
 
     @Override
