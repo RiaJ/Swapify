@@ -29,7 +29,7 @@ public class FlightInfo extends ParseObject {
         return getString("logo");
     }
 
-    public List<Map.Entry<BigInteger, String>> getSeats() {
+    public List<List<String>> getSeats() {
         return getList("seats");
     }
 
@@ -53,7 +53,7 @@ public class FlightInfo extends ParseObject {
         put("logo", logo);
     }
 
-    public void setSeats(List<Map.Entry<BigInteger, String>> seats) {
+    public void setSeats(List<List<String>> seats) {
         put("seats", seats);
     }
 }
