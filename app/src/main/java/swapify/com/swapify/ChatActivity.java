@@ -51,6 +51,7 @@ public class ChatActivity extends Activity{
 
         //TODO:set userId here...
 
+        setupMessagePosting();
         handler.postDelayed(runnable, 100);
     }
 
@@ -69,9 +70,9 @@ public class ChatActivity extends Activity{
 
     // Setup message field and posting
     private void setupMessagePosting() {
-        messageField = (EditText) findViewById(R.id.etMessage);
-        sendButton = (Button) findViewById(R.id.btSend);
-        chatListView = (ListView) findViewById(R.id.lvChat);
+        messageField = (EditText) findViewById(R.id.messageField);
+        sendButton = (Button) findViewById(R.id.sendButton);
+        chatListView = (ListView) findViewById(R.id.chatListView);
         messageArrayList = new ArrayList<Message>();
         // Automatically scroll to the bottom when a data set change notification is received and only if the last item is already visible on screen. Don't scroll to the bottom otherwise.
         chatListView.setTranscriptMode(1);
