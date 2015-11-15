@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -31,28 +34,47 @@ public class AddFlightActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 EditText flightNoText = (EditText) findViewById(R.id.edit_flight_no);
-                String flightNo = flightNoText.getText().toString();
+                final String flightNo = flightNoText.getText().toString();
                 EditText equipmentText = (EditText) findViewById(R.id.edit_equipment);
-                String equipment = equipmentText.getText().toString();
+                final String equipment = equipmentText.getText().toString();
                 EditText seatNoText = (EditText) findViewById(R.id.edit_seat_no);
-                String seatNo = seatNoText.getText().toString();
+                final String seatNo = seatNoText.getText().toString();
 
-                FlightInfo flightInfo = new FlightInfo();
-                flightInfo.setFlightNo(flightNo);
-                flightInfo.setEquipment(equipment);
-                List<List<String>> seatsSoFar = flightInfo.getSeats();
-                String userId = ParseUser.getCurrentUser().getObjectId();
-                List<String> newSeat = new ArrayList<String>(2);
-                newSeat.add(userId);
-                newSeat.add(seatNo);
-                seatsSoFar.add(newSeat);
-                flightInfo.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
+                ParseQuery query = new ParseQuery("FlightInfo");
+                query.whereEqualTo("flightNo", flightNo);
+                query.findInBackground(new FindCallback<FlightInfo>() {
+                    public void done(List<FlightInfo> flightInfos, ParseException e) {
                         if (e == null) {
-                            DialogFragment chooseActivityFragment =
-                                    new ChooseActivityDialogFragment();
-                            chooseActivityFragment.show(getSupportFragmentManager(), "chooser");
+                            FlightInfo flightInfo;
+                            List<List<String>> seatsSoFar;
+                            if (flightInfos.isEmpty()) {
+                                flightInfo = new FlightInfo();
+                                flightInfo.setFlightNo(flightNo);
+                                flightInfo.setEquipment(equipment);
+                                seatsSoFar = new ArrayList<List<String>>();
+                            } else {
+                                flightInfo = flightInfos.get(0);
+                                seatsSoFar = flightInfo.getSeats();
+                                if (seatsSoFar == null) seatsSoFar = new ArrayList<List<String>>();
+                            }
+                            String userId = ParseUser.getCurrentUser().getObjectId();
+                            List<String> newSeat = new ArrayList<String>(2);
+                            newSeat.add(userId);
+                            newSeat.add(seatNo);
+                            seatsSoFar.add(newSeat);
+                            flightInfo.setSeats(seatsSoFar);
+                            flightInfo.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+                                        DialogFragment chooseActivityFragment =
+                                                new ChooseActivityDialogFragment();
+                                        chooseActivityFragment.show(getSupportFragmentManager(), "chooser");
+                                    }
+                                }
+                            });
+                        } else {
+                            Log.d("message", "Error: " + e.getMessage());
                         }
                     }
                 });
@@ -67,6 +89,8 @@ public class AddFlightActivity extends FragmentActivity {
             builder.setMessage(R.string.choose_activity)
                     .setPositiveButton(R.string.go_current, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            Intent i = new Intent(getContext(), FlightActivity.class);
+                            startActivity(i);
                         }
                     })
                     .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
