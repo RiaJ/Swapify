@@ -59,8 +59,6 @@ public class HomeActivity extends Activity {
             }
         });
 
-        //TODO: Redirect to login if no user found
-
         findViewById(R.id.add_flight_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,16 +76,19 @@ public class HomeActivity extends Activity {
     }
 
     private void onLoginButtonClicked() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
+            return;
+        }
+
         List<String> permissions = Arrays.asList("public_profile");
 
         ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback() {
             @Override
             public void done(final ParseUser user, ParseException err) {
                 if (user == null) {
-                    findViewById(R.id.add_flight_and_current_flights).setVisibility(View.GONE);
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
-                    //TODO: Create new parse user and push it to server
                     userId = ParseUser.getCurrentUser().getObjectId();
                     /* make the API call */
 
