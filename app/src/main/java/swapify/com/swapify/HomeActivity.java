@@ -69,6 +69,15 @@ public class HomeActivity extends Activity {
         } else { // If not logged in, login as a new anonymous user
             login();
         }
+
+
+        findViewById(R.id.add_flight_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), AddFlightActivity.class);
+                startActivity(i);
+            }
+        }); 
     }
 
     @Override
@@ -116,5 +125,4 @@ public class HomeActivity extends Activity {
             }
         });
     }
-
 }
