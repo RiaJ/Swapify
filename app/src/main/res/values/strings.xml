@@ -10,4 +10,13 @@
     <string name="send">Send</string>
     <string name="profile_me">My Profile Pic</string>
     <string name="profile_other">Other profile pic</string>
+    <string name="title_activity_add_flight">AddFlightActivity</string>
+
+    <string name="flight_no">Flight No.</string>
+    <string name="plane_type">Plane Type</string>
+    <string name="seat_no">Seat No.</string>
+    <string name="flight_no_ex">Ex. SK2616</string>
+    <string name="plane_type_ex">Ex. B737</string>
+    <string name="seat_no_ex">Ex. 30A</string>
+    <string name="save_flight_info">Save My Flight</string>
 </resources>

@@ -129,6 +129,14 @@ public class HomeActivity extends Activity {
                 }
             }
         });
+        
+        findViewById(R.id.add_flight_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), AddFlightActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
