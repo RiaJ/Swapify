@@ -30,13 +30,11 @@ public class AddFlightActivity extends Activity {
 
                 FlightInfo flightInfo = new FlightInfo();
                 flightInfo.setFlightNo(flightNo);
-                flightInfo.setPlaneType(planeType);
-                flightInfo.setSeatNo(seatNo);
                 flightInfo.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
-                            
+
                         }
                     }
                 });
