@@ -13,10 +13,14 @@
     <string name="title_activity_add_flight">AddFlightActivity</string>
 
     <string name="flight_no">Flight No.</string>
-    <string name="plane_type">Plane Type</string>
+    <string name="equipment">Equipment</string>
     <string name="seat_no">Seat No.</string>
     <string name="flight_no_ex">Ex. SK2616</string>
-    <string name="plane_type_ex">Ex. B737</string>
+    <string name="equipment_ex">Ex. B737</string>
     <string name="seat_no_ex">Ex. 30A</string>
     <string name="save_flight_info">Save My Flight</string>
+
+    <string name="choose_activity">Flight info saved!</string>
+    <string name="go_current">See current flights</string>
+    <string name="add_more">Add another flight</string>
 </resources>

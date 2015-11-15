@@ -33,26 +33,26 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/plane_type_layout"
+        android:id="@+id/equipment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/flight_no_layout"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/plane_type"
+            android:id="@+id/equipment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plane_type"
+            android:text="@string/equipment"
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/edit_plane_type"
+            android:id="@+id/edit_equipment"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:hint="@string/plane_type_ex" />
+            android:hint="@string/equipment_ex" />
 
     </LinearLayout>
 
@@ -60,7 +60,7 @@
         android:id="@+id/seat_no_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/plane_type_layout"
+        android:layout_below="@id/equipment_layout"
         android:orientation="horizontal">
 
         <TextView
