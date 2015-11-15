@@ -38,7 +38,7 @@ public class FlightPassengerActivity extends Activity {
 
     private void setupFlightInfo() {
         passengerInfoListView = (ListView) findViewById(R.id.passengersListView);
-        passengerInfoList = new ArrayList<List<String>>();
+        passengerInfoList = new ArrayList<>();
 
         passengerInfoListView.setTranscriptMode(1);
         flightPassengerListAdapter = new FlightPassengerAdapter(FlightPassengerActivity.this, passengerInfoList);
@@ -52,13 +52,25 @@ public class FlightPassengerActivity extends Activity {
             public void done(List<FlightInfo> flightInfos, ParseException e) {
                 if (e == null) {
                     FlightInfo currentFlightInfo = flightInfos.get(0);
+                    List<List<String>> filteredSeats = filterSeats(currentFlightInfo.getSeats(), ParseUser.getCurrentUser().getObjectId());
                     passengerInfoList.clear();
-                    passengerInfoList.addAll(currentFlightInfo.getSeats());
+                    passengerInfoList.addAll(filteredSeats);
                     flightPassengerListAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("message", "Error: " + e.getMessage());
                 }
             }
         });
+    }
+
+    //remove entries where current user exists
+    private List<List<String>> filterSeats(List<List<String>> seats, String userId) {
+        List<List<String>> passengersNotIncludingSelf = new ArrayList<>();
+        for (int i = 0; i < seats.size(); i++) {
+            if (!seats.get(i).get(0).equals(userId)) {
+                passengersNotIncludingSelf.add(seats.get(i));
+            }
+        }
+        return  passengersNotIncludingSelf;
     }
 }
