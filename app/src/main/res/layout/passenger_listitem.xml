@@ -16,7 +16,6 @@
         <TextView
             android:textSize="18sp"
             android:id="@+id/passengerName"
-            android:padding="10dp"
             android:lines="3"
             android:layout_marginRight="64dp"
             android:layout_width="match_parent"
@@ -25,7 +24,6 @@
         <TextView
             android:textSize="16sp"
             android:id="@+id/seatNumber"
-            android:padding="10dp"
             android:lines="3"
             android:layout_marginRight="64dp"
             android:layout_width="match_parent"
