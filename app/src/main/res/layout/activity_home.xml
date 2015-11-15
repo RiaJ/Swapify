@@ -15,14 +15,8 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+       <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp" />
@@ -56,55 +50,13 @@
 
     </LinearLayout>
 
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            tools:visibility="gone" />
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
-
-        <LinearLayout
-            android:id="@+id/sign_out_and_disconnect"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:visibility="gone"
-            android:weightSum="2"
-            tools:visibility="visible">
-
-            <Button
-                android:id="@+id/sign_out_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sign_out" />
-
-            <Button
-                android:id="@+id/disconnect_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/disconnect" />
-        </LinearLayout>
-
-    </RelativeLayout>
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        tools:visibility="gone" />
 
 </LinearLayout>
