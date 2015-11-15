@@ -35,7 +35,9 @@ public class AddFlightActivity extends Activity {
                 flightInfo.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-
+                        if (e == null) {
+                            
+                        }
                     }
                 });
             }
