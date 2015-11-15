@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -99,7 +101,26 @@ public class AddFlightActivity extends FragmentActivity {
                             startActivity(i);
                         }
                     });
-            return builder.create();
+            final AlertDialog chooserDialog = builder.create();
+            chooserDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface d) {
+                    Button posButton = chooserDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    Button negButton = chooserDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+                    LinearLayout.LayoutParams posParams =
+                            (LinearLayout.LayoutParams) posButton.getLayoutParams();
+                    posParams.weight = 1;
+
+                    LinearLayout.LayoutParams negParams =
+                            (LinearLayout.LayoutParams) negButton.getLayoutParams();
+                    negParams.weight = 1;
+
+                    posButton.setLayoutParams(posParams);
+                    negButton.setLayoutParams(negParams);
+                }
+            });
+            return chooserDialog;
         }
     }
 }
