@@ -15,6 +15,6 @@ public class AddFlightActivity extends Activity {
             @Override
             public void onClick(View v) {
             }
-        });g
+        });
     }
 }
