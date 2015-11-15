@@ -36,6 +36,10 @@
             android:label="@string/title_activity_flight" >
         </activity>
         <activity
+            android:name=".FlightPassengerActivity"
+            android:label="@string/title_activity_chat" >
+        </activity>
+        <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>

@@ -1,8 +1,11 @@
 package swapify.com.swapify;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -10,6 +13,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,15 @@ public class FlightActivity extends Activity {
         flightInfoListView.setTranscriptMode(1);
         flightListAdapter = new FlightListAdapter(FlightActivity.this, flightInfoArrayList);
         flightInfoListView.setAdapter(flightListAdapter);
+        flightInfoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(view.getContext(), FlightPassengerActivity.class);
+                i.putExtra("FlightNo", flightInfoArrayList.get(position).getFlightNo());
+
+                startActivity(i);
+            }
+        });
 
         retrieveFlightInfo();
     }

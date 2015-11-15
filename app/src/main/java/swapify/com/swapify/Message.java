@@ -12,11 +12,19 @@ public class Message extends ParseObject {
         return getString("userId");
     }
 
+    public String getSecondUserId() {
+        return getString("userId");
+    }
+
     public String getBody() {
         return getString("body");
     }
 
     public void setUserId(String userId) {
+        put("userId", userId);
+    }
+
+    public void setSecondUserId(String userId) {
         put("userId", userId);
     }
 
