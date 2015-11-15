@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
 public class AddFlightActivity extends Activity {
@@ -14,6 +15,8 @@ public class AddFlightActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flight);
+
+        ParseObject.registerSubclass(FlightInfo.class);
 
         findViewById(R.id.save_flight_info).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +35,7 @@ public class AddFlightActivity extends Activity {
                 flightInfo.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        
+
                     }
                 });
             }
