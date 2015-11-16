@@ -46,7 +46,6 @@ public class HomeActivity extends Activity {
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        ParseObject.registerSubclass(Message.class);
         Parse.initialize(this, SWAPIFY_APPLICATION_ID, SWAPIFY_CLIENT_KEY);
         ParseFacebookUtils.initialize(this);
 

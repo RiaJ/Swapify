@@ -1,9 +1,12 @@
 package swapify.com.swapify;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -30,10 +33,18 @@ public class FlightPassengerActivity extends Activity {
         setContentView(R.layout.activity_listpassengers);
 
         ParseObject.registerSubclass(FlightInfo.class);
-        ParseObject.registerSubclass(Message.class);
 
-        //TODO:set userId here...
         setupFlightInfo();
+
+        passengerInfoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(view.getContext(), ChatActivity.class);
+                i.putExtra("userTwo", passengerInfoList.get(position).get(0));
+
+                startActivity(i);
+            }
+        });
     }
 
     private void setupFlightInfo() {

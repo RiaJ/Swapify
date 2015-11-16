@@ -32,7 +32,6 @@ public class FlightActivity extends Activity {
         setContentView(R.layout.activity_listflights);
 
         ParseObject.registerSubclass(FlightInfo.class);
-        ParseObject.registerSubclass(Message.class);
 
         //TODO:set userId here...
         setupFlightInfo();
