@@ -54,8 +54,6 @@ public class ChatActivity extends Activity{
 
         ParseObject.registerSubclass(Chat.class);
 
-        //TODO:set userId here...
-
         setupMessagePosting();
         handler.postDelayed(runnable, 100);
     }
@@ -126,9 +124,9 @@ public class ChatActivity extends Activity{
                         }
                     }
                 });
+                messageField.setText("");
             }
         });
-        messageField.setText("");
     }
 
     // Query messages from Parse so we can load them into the chat adapter
@@ -142,9 +140,19 @@ public class ChatActivity extends Activity{
         query.findInBackground(new FindCallback<Chat>() {
             public void done(List<Chat> chats, ParseException e) {
                 if (e == null) {
-                    Chat currentChat = chats.get(0);
+                    Chat currentChat = new Chat();
+                    List<List<String>> messagesSoFar;
+                    if (chats.isEmpty()) {
+                        messagesSoFar = new ArrayList<List<String>>();
+                    } else {
+                        currentChat = chats.get(0);
+                        messagesSoFar = currentChat.getMessages();
+                        if (messagesSoFar == null)
+                            messagesSoFar = new ArrayList<List<String>>();
+                    }
+
                     messageArrayList.clear();
-                    messageArrayList.addAll(currentChat.getMessages());
+                    messageArrayList.addAll(messagesSoFar);
                     chatListAdapter.notifyDataSetChanged();
                     //TODO:scroll to bottom magic
                 } else {
