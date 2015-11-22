@@ -28,4 +28,7 @@
 
     <string name="swap_seat">SWAP</string>
     <string name="swap_requests">Swap Requests</string>
+    <string name="title_activity_request">RequestActivity</string>
+    <string name="incoming">Incoming Requests</string>
+    <string name="outgoing">Outgoing Requests</string>
 </resources>

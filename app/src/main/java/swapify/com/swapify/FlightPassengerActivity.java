@@ -55,7 +55,7 @@ public class FlightPassengerActivity extends Activity {
         flightPassengerListAdapter = new FlightPassengerAdapter(FlightPassengerActivity.this, passengerInfoList);
         passengerInfoListView.setAdapter(flightPassengerListAdapter);
 
-        String currentFlightNo = getIntent().getStringExtra("FlightNo");
+        final String currentFlightNo = getIntent().getStringExtra("FlightNo");
 
         ParseQuery query = new ParseQuery("FlightInfo");
         query.whereEqualTo("flightNo", currentFlightNo);
@@ -63,7 +63,24 @@ public class FlightPassengerActivity extends Activity {
             public void done(List<FlightInfo> flightInfos, ParseException e) {
                 if (e == null) {
                     FlightInfo currentFlightInfo = flightInfos.get(0);
-                    List<List<String>> filteredSeats = filterSeats(currentFlightInfo.getSeats(), ParseUser.getCurrentUser().getObjectId());
+                    String myId = ParseUser.getCurrentUser().getObjectId();
+                    List<List<String>> seats = currentFlightInfo.getSeats();
+                    List<List<String>> filteredSeats = filterSeats(seats, myId);
+                    // add current flight no
+                    for (List<String> seat : filteredSeats) {
+                        seat.add(currentFlightNo);
+                    }
+                    // add my own seat number
+                    String mySeat = "";
+                    for (List<String> seat : seats) {
+                        if (seat.get(0).equals(myId)) {
+                            mySeat = seat.get(1);
+                            break;
+                        }
+                    }
+                    for (List<String> seat : filteredSeats) {
+                        seat.add(mySeat);
+                    }
                     passengerInfoList.clear();
                     passengerInfoList.addAll(filteredSeats);
                     flightPassengerListAdapter.notifyDataSetChanged();
