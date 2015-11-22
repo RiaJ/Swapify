@@ -72,6 +72,21 @@ public class HomeActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        findViewById(R.id.current_flights_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), FlightActivity.class);
+                startActivity(i);
+            }
+        });
+        findViewById(R.id.swap_requests_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), RequestActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void onLoginButtonClicked() {

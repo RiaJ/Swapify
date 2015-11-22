@@ -27,4 +27,5 @@
     <string name="add_more">Add another flight</string>
 
     <string name="swap_seat">SWAP</string>
+    <string name="swap_requests">Swap Requests</string>
 </resources>
