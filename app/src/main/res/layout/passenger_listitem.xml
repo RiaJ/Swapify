@@ -9,26 +9,45 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@mipmap/ic_launcher" />
+
     <LinearLayout
         android:layout_height="64dp"
         android:layout_width="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/passengerName"
-            android:lines="3"
-            android:layout_marginRight="64dp"
-            android:layout_width="match_parent"
-            android:layout_height="32dp">
-        </TextView>
-        <TextView
-            android:textSize="16sp"
-            android:id="@+id/seatNumber"
-            android:lines="3"
-            android:layout_marginRight="64dp"
-            android:layout_width="match_parent"
-            android:layout_height="32dp">
-        </TextView>
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <LinearLayout
+            android:layout_height="64dp"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3">
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/passengerName"
+                android:lines="3"
+                android:layout_marginRight="64dp"
+                android:layout_width="match_parent"
+                android:layout_height="32dp">
+            </TextView>
+
+            <TextView
+                android:textSize="16sp"
+                android:id="@+id/seatNumber"
+                android:lines="3"
+                android:layout_marginRight="64dp"
+                android:layout_width="match_parent"
+                android:layout_height="32dp">
+            </TextView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/swap_button"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/swap_seat"
+            android:layout_marginRight="3dp"
+            android:onClick="send_request"/>
     </LinearLayout>
+
 
 </LinearLayout>

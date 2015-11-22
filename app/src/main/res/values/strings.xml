@@ -25,4 +25,6 @@
     <string name="choose_activity">Flight info saved!</string>
     <string name="go_current">See current flights</string>
     <string name="add_more">Add another flight</string>
+
+    <string name="swap_seat">SWAP</string>
 </resources>
