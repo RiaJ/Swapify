@@ -15,12 +15,20 @@ public class SwapRequest extends ParseObject {
         return getString("userTwoId");
     }
 
-    public String getCombinedUserId() {
-        return getString("combinedUserId");
+    public String getUserOneSeat() {
+        return getString("userOneSeat");
     }
 
-    public List<List<String>> getSwappedSeat() {
-        return getList("swappedSeat");
+    public String getUserTwoSeat() {
+        return getString("userTwoSeat");
+    }
+
+    public String getUserOneFlight() {
+        return getString("userOneFlight");
+    }
+
+    public String getUserTwoFlight() {
+        return getString("userTwoFlight");
     }
 
     public void setUserOneId(String userOneId) {
@@ -31,11 +39,19 @@ public class SwapRequest extends ParseObject {
         put("userTwoId", userTwoId);
     }
 
-    public void setCombinedUserId(String combinedUserId) {
-        put("combinedUserId", combinedUserId);
+    public void setUserOneSeat(String userOneSeat) {
+        put("userOneSeat", userOneSeat);
     }
 
-    public void setSwappedSeat(String swappedSeat) {
-        put("swappedSeat", swappedSeat);
+    public void setUserTwoSeat(String userTwoSeat) {
+        put("userTwoSeat", userTwoSeat);
+    }
+
+    public void setUserOneFlight(String userOneFlight) {
+        put("userOneFlight", userOneFlight);
+    }
+
+    public void setUserTwoFlight(String userTwoFlight) {
+        put("userTwoFlight", userTwoFlight);
     }
 }
