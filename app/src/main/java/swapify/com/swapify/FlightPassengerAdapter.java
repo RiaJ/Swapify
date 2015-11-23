@@ -64,30 +64,51 @@ public class FlightPassengerAdapter extends ArrayAdapter<List<String>> {
                     holder.swapButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(final View v) {
-                            SwapRequest request = new SwapRequest();
-                            request.setUserTwoId(userId);
-                            request.setUserTwoSeat(seat);
-                            request.setUserTwoFlight(flight);
-                            request.setUserOneId(ParseUser.getCurrentUser().getObjectId());
-                            request.setUserOneFlight(flight);
-                            request.setUserOneSeat(passengerInfo.get(3));
-                            request.saveInBackground();
-                            holder.swapButton.setEnabled(false);
-
-                            new AlertDialog.Builder(v.getContext())
-                                    .setMessage(R.string.save_request)
-                                    .setPositiveButton(R.string.go_requests, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            Intent i = new Intent(v.getContext(), RequestActivity.class);
-                                            v.getContext().startActivity(i);
+                            final String userOneId = ParseUser.getCurrentUser().getObjectId();
+                            String key = "";
+                            if (userOneId.compareTo(userId) < 0) {
+                                key = userOneId + userId + flight;
+                            } else {
+                                key = userId + userOneId + flight;
+                            }
+                            final String reqKey = key;
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            ParseQuery query = new ParseQuery("SwapRequest");
+                            query.whereEqualTo("requestKey", key);
+                            query.findInBackground(new FindCallback<SwapRequest>() {
+                                public void done(List<SwapRequest> swapRequests, ParseException e) {
+                                    if (e == null) {
+                                        if (swapRequests.isEmpty()) {
+                                            final SwapRequest request = new SwapRequest();
+                                            request.setRequestKey(reqKey);
+                                            request.setUserTwoId(userId);
+                                            request.setUserTwoSeat(seat);
+                                            request.setUserTwoFlight(flight);
+                                            request.setUserOneId(userOneId);
+                                            request.setUserOneFlight(flight);
+                                            request.setUserOneSeat(passengerInfo.get(3));
+                                            request.saveInBackground();
+                                            builder.setMessage(R.string.save_request);
+                                        } else {
+                                            builder.setMessage(R.string.already_exist);
                                         }
-                                    })
-                                    .setNegativeButton(R.string.make_req, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    })
-                                    .show();
+                                        builder.setPositiveButton(R.string.go_requests, new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        Intent i = new Intent(v.getContext(), RequestActivity.class);
+                                                        v.getContext().startActivity(i);
+                                                    }
+                                                })
+                                                .setNegativeButton(R.string.make_req, new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                                .show();
+                                    } else {
+                                        Log.d("message", "Error: " + e.getMessage());
+                                    }
+                                }
+                            });
                         }
                     });
                     // The query was successful.
