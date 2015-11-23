@@ -26,32 +26,32 @@ public class InRequestListAdapter extends ArrayAdapter<SwapRequest> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).
                     inflate(R.layout.inrequest_listitem, parent, false);
-            final ViewHolder holder = new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.request_username);
-            holder.flightNo = (TextView) convertView.findViewById(R.id.request_flight_no);
-            holder.seatNo = (TextView) convertView.findViewById(R.id.request_seat);
-            convertView.setTag(holder);
-        }
-        final SwapRequest request = getItem(position);
-        final ViewHolder holder = (ViewHolder)convertView.getTag();
-        String userId = request.getUserOneId();
-        final String seat = request.getUserOneSeat();
-        final String flight = request.getUserOneFlight();
+            final ViewHolder holder1 = new ViewHolder();
+            holder1.name = (TextView) convertView.findViewById(R.id.request_username);
+            holder1.flightNo = (TextView) convertView.findViewById(R.id.request_flight_no);
+            holder1.seatNo = (TextView) convertView.findViewById(R.id.request_seat);
+            convertView.setTag(holder1);
+            final SwapRequest request = getItem(position);
+            final ViewHolder holder2 = (ViewHolder)convertView.getTag();
+            String userId = request.getUserOneId();
+            final String seat = request.getUserOneSeat();
+            final String flight = request.getUserOneFlight();
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("objectId", userId);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> objects, ParseException e) {
-                if (e == null) {
-                    holder.name.setText(objects.get(0).getUsername());
-                    holder.flightNo.setText(flight);
-                    holder.seatNo.setText(seat);
-                    // The query was successful.
-                } else {
-                    // Something went wrong.
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("objectId", userId);
+            query.findInBackground(new FindCallback<ParseUser>() {
+                public void done(List<ParseUser> objects, ParseException e) {
+                    if (e == null) {
+                        holder2.name.setText(objects.get(0).getUsername());
+                        holder2.flightNo.setText(flight);
+                        holder2.seatNo.setText(seat);
+                        // The query was successful.
+                    } else {
+                        // Something went wrong.
+                    }
                 }
-            }
-        });
+            });
+        }
         return convertView;
     }
 

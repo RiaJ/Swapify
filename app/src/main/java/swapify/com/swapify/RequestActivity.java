@@ -83,6 +83,9 @@ public class RequestActivity extends FragmentActivity {
                 if (e == null) {
                     outRequestArrayList.clear();
                     outRequestArrayList.addAll(swapRequests);
+                    for (SwapRequest req : outRequestArrayList) {
+                        Log.d("out", req.getUserTwoId());
+                    }
                     outRequestListAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("message", "Error: " + e.getMessage());
