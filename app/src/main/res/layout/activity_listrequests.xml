@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dip" >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -21,8 +20,7 @@
             android:id="@+id/inRequestListView"
             android:transcriptMode="alwaysScroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip">
+            android:layout_height="wrap_content">
         </ListView>
     </LinearLayout>
 
@@ -30,13 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dip" >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:gravity="center_vertical"
             android:text="@string/outgoing" />
 
@@ -44,8 +40,7 @@
             android:id="@+id/outRequestListView"
             android:transcriptMode="alwaysScroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip">
+            android:layout_height="wrap_content">
         </ListView>
     </LinearLayout>
 

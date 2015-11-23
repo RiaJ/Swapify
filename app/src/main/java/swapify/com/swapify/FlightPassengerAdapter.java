@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -24,6 +25,7 @@ import java.util.List;
 public class FlightPassengerAdapter extends ArrayAdapter<List<String>> {
     public FlightPassengerAdapter(Context context, List<List<String>> passengers) {
         super(context, 0, passengers);
+        ParseObject.registerSubclass(SwapRequest.class);
     }
 
     @Override

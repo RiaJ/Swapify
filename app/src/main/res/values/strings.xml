@@ -31,4 +31,11 @@
     <string name="title_activity_request">RequestActivity</string>
     <string name="incoming">Incoming Requests</string>
     <string name="outgoing">Outgoing Requests</string>
+
+    <string name="accept_or_decline">Are you going to accept the requeset?</string>
+    <string name="accept">ACCEPT</string>
+    <string name="decline">DECLINE</string>
+    <string name="cancel_or_not">Are you sure you want to cancel the request?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

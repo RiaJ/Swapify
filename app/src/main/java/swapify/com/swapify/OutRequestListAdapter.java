@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -23,14 +25,14 @@ public class OutRequestListAdapter extends ArrayAdapter<SwapRequest> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).
-                    inflate(R.layout.request_listitem, parent, false);
+                    inflate(R.layout.outrequest_listitem, parent, false);
             final ViewHolder holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.request_username);
             holder.flightNo = (TextView) convertView.findViewById(R.id.request_flight_no);
             holder.seatNo = (TextView) convertView.findViewById(R.id.request_seat);
             convertView.setTag(holder);
         }
-        SwapRequest request = getItem(position);
+        final SwapRequest request = getItem(position);
         final ViewHolder holder = (ViewHolder)convertView.getTag();
         String userId = request.getUserTwoId();
         final String seat = request.getUserTwoSeat();
