@@ -15,10 +15,10 @@
     <string name="title_activity_chat">ChatActivity</string>
 
     <string name="flight_no">Flight No.</string>
-    <string name="equipment">Equipment</string>
+    <string name="carrier">Carrier</string>
     <string name="seat_no">Seat No.</string>
-    <string name="flight_no_ex">Ex. SK2616</string>
-    <string name="equipment_ex">Ex. B737</string>
+    <string name="flight_no_ex">Ex. 101</string>
+    <string name="carrier_ex">Ex. AA</string>
     <string name="seat_no_ex">Ex. 30A</string>
     <string name="save_flight_info">Save My Flight</string>
 
@@ -44,4 +44,12 @@
     <string name="already_exist">This request already exist!</string>
     <string name="go_requests">See current swap requests</string>
     <string name="make_req">Make another request</string>
+
+    <string name="flight_add_error">Uh oh, we can\'t find seem to find that flight</string>
+    <string name="flight_add_error_message">Double check your dates and flight info</string>
+    <string name="flight_add_error_cancel">Try again</string>
+
+    <string name="user_exists_error">You\'ve already registered this flight</string>
+    <string name="user_exists_error_message">You can cancel this flight by going to settings</string>
+    <string name="user_exists_error_cancel">Ok</string>
 </resources>
