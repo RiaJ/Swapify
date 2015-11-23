@@ -7,6 +7,10 @@ import java.util.List;
 
 @ParseClassName("SwapRequest")
 public class SwapRequest extends ParseObject {
+    public String getRequestKey() {
+        return getString("requestKey");
+    }
+
     public String getUserOneId() {
         return getString("userOneId");
     }
@@ -29,6 +33,10 @@ public class SwapRequest extends ParseObject {
 
     public String getUserTwoFlight() {
         return getString("userTwoFlight");
+    }
+
+    public void setRequestKey (String requestKey) {
+        put("requestKey", requestKey);
     }
 
     public void setUserOneId(String userOneId) {

@@ -39,4 +39,8 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="my_seat_fmt">My seat: %s</string>
+
+    <string name="save_request">Swap request saved!</string>
+    <string name="go_requests">See current swap requests</string>
+    <string name="make_req">Make another request</string>
 </resources>
