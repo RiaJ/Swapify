@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -15,6 +16,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +87,10 @@ public class FlightPassengerActivity extends Activity {
                     passengerInfoList.clear();
                     passengerInfoList.addAll(filteredSeats);
                     flightPassengerListAdapter.notifyDataSetChanged();
+
+                    // set my seat field
+                    TextView my_seat_tv = (TextView) findViewById(R.id.my_seat);
+                    my_seat_tv.setText(getString(R.string.my_seat_fmt, mySeat));
                 } else {
                     Log.d("message", "Error: " + e.getMessage());
                 }

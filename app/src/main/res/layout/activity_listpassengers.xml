@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/my_seat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_seat_fmt"
+        android:textSize="30sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"/>
     <ListView
         android:id="@+id/passengersListView"
         android:transcriptMode="alwaysScroll"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/llSend"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <RelativeLayout
@@ -24,4 +32,4 @@
         android:paddingRight="0dp"
         android:layout_height="wrap_content" >
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

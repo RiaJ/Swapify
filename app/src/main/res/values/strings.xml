@@ -38,4 +38,5 @@
     <string name="cancel_or_not">Are you sure you want to cancel the request?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="my_seat_fmt">My seat: %s</string>
 </resources>
