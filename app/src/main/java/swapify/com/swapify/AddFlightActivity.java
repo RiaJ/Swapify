@@ -1,6 +1,7 @@
 package swapify.com.swapify;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,8 +15,8 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,14 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -40,11 +44,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TimeZone;
 
 public class AddFlightActivity extends FragmentActivity{
     private static Integer CONNECTION_TIMEOUT = 15000;
@@ -52,12 +59,30 @@ public class AddFlightActivity extends FragmentActivity{
 
     private static String Flight_Stats_Base_URI = "https://api.flightstats.com/flex/";
 
+    private EditText dateEditView;
+    public static Calendar mCalendar;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+
+    DatePickerFragment dateFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flight);
 
         ParseObject.registerSubclass(FlightInfo.class);
+
+        dateEditView = (EditText) findViewById(R.id.date_chooser_text_edit);
+        mCalendar = Calendar.getInstance();
+
+        dateEditView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
+        updateDateButtonText();
 
         findViewById(R.id.save_flight_info).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +98,6 @@ public class AddFlightActivity extends FragmentActivity{
                 tempFlightInfo.airline = carrier.toUpperCase();
                 tempFlightInfo.flightNum = flightNo;
                 tempFlightInfo.seatNum = seatNo.toUpperCase();
-
 
                 if (carrier.matches("")) {
                     Toast.makeText(AddFlightActivity.this, "Please enter an air carrier", Toast.LENGTH_SHORT).show();
@@ -93,9 +117,12 @@ public class AddFlightActivity extends FragmentActivity{
     }
 
     private void checkAgainstFlightSchedule(TempFlightInfo flightInfo) {
-        String year = "2015";
-        String month = "11";
-        String day = "22";
+        String year = Integer.toString(mCalendar.get(Calendar.YEAR));
+        String month = Integer.toString(mCalendar.get(Calendar.MONTH) + 1);
+        String day = Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH));
+        Log.d("Year", year);
+        Log.d("Month", month);
+        Log.d("Day", day);
 
         String APIRequestString = Flight_Stats_Base_URI
                 + "schedules/rest/v1/json/flight/"
@@ -111,6 +138,24 @@ public class AddFlightActivity extends FragmentActivity{
         FlightStatsService flightStatsService = new FlightStatsService(flightInfo);
         Log.d("API Request", APIRequestString);
         flightStatsService.execute(APIRequestString);
+    }
+
+    public void updateDateButtonText() {
+        LocalDate localDateToday = new DateTime(Calendar.getInstance()).toLocalDate();
+        LocalDate calendarSetDate = new DateTime(mCalendar).toLocalDate();
+
+        if (calendarSetDate.compareTo(localDateToday) < 0) {
+            mCalendar = Calendar.getInstance();
+            Toast.makeText(AddFlightActivity.this, "You can't select a date in the past", Toast.LENGTH_SHORT).show();
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        String dateForButton = dateFormat.format(mCalendar.getTime());
+        dateEditView.setText(dateForButton);
+    }
+
+    public void showDatePickerDialog(View v) {
+        dateFragment = new DatePickerFragment();
+        dateFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     private class FlightStatsService extends AsyncTask<String, Integer, JSONObject>{
@@ -374,6 +419,26 @@ public class AddFlightActivity extends FragmentActivity{
 
             AlertDialog dialog = builder.create();
             dialog.show();
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int year = mCalendar.get(Calendar.YEAR);
+            int month = mCalendar.get(Calendar.MONTH);
+            int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            mCalendar.set(Calendar.YEAR, year);
+            mCalendar.set(Calendar.MONTH, month);
+            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            ((AddFlightActivity) getActivity()).updateDateButtonText();
         }
     }
 

@@ -17,6 +17,7 @@
     <string name="flight_no">Flight No.</string>
     <string name="carrier">Carrier</string>
     <string name="seat_no">Seat No.</string>
+    <string name="choose_date">Departure Date</string>
     <string name="flight_no_ex">Ex. 101</string>
     <string name="carrier_ex">Ex. AA</string>
     <string name="seat_no_ex">Ex. 30A</string>
@@ -33,4 +34,7 @@
     <string name="user_exists_error">You\'ve already registered this flight</string>
     <string name="user_exists_error_message">You can cancel this flight by going to settings</string>
     <string name="user_exists_error_cancel">Ok</string>
+
+    <string name="select_date">Select your departure date</string>
+    <string name="date_selected"></string>
 </resources>
