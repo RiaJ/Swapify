@@ -62,6 +62,7 @@ public class ScanQRCodeActivity extends Activity{
                 camera.stopScanner();
                 Intent i = new Intent(ScanQRCodeActivity.this, AddFlightActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -388,12 +389,14 @@ public class ScanQRCodeActivity extends Activity{
                     public void onClick(DialogInterface dialog, int id) {
                         Intent i = new Intent(ScanQRCodeActivity.this, FlightActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 })
                 .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent i = new Intent(ScanQRCodeActivity.this, AddFlightActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 });
 

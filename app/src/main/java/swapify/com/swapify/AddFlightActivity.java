@@ -117,6 +117,7 @@ public class AddFlightActivity extends FragmentActivity{
             public void onClick(View v) {
                 Intent i = new Intent(AddFlightActivity.this, ScanQRCodeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -331,6 +332,15 @@ public class AddFlightActivity extends FragmentActivity{
                 }
             });
 
+            Button reject_button = (Button) dialog.findViewById(R.id.reject_button);
+            reject_button.setText("No, search again");
+            reject_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+
             return dialog;
         }
 
@@ -414,12 +424,14 @@ public class AddFlightActivity extends FragmentActivity{
                         public void onClick(DialogInterface dialog, int id) {
                             Intent i = new Intent(getContext(), FlightActivity.class);
                             startActivity(i);
+                            getActivity().finish();
                         }
                     })
                     .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent i = new Intent(getContext(), AddFlightActivity.class);
                             startActivity(i);
+                            getActivity().finish();
                         }
                     });
 

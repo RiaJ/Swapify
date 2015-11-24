@@ -71,7 +71,6 @@ public class FlightActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 deleteFlightInfoForUser(selectedFlightInfo);
-                                flightListAdapter.notifyDataSetChanged(); // update adapter
                             }
                         })
                         .setNegativeButton(R.string.delete_user_flight_no, new DialogInterface.OnClickListener() {
