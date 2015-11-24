@@ -28,14 +28,12 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -51,7 +49,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TimeZone;
 
 public class AddFlightActivity extends FragmentActivity{
     private static Integer CONNECTION_TIMEOUT = 15000;
@@ -114,6 +111,15 @@ public class AddFlightActivity extends FragmentActivity{
                 }
             }
         });
+
+        findViewById(R.id.scan_qr_code).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddFlightActivity.this, ScanQRCodeActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void checkAgainstFlightSchedule(TempFlightInfo flightInfo) {
@@ -346,25 +352,25 @@ public class AddFlightActivity extends FragmentActivity{
                             flightInfo.setFlightNo(flightData.get("flightNumber"));
                             flightInfo.setEquipment(flightData.get("equipment"));
                             seatsSoFar = new ArrayList<List<String>>();
+                            List<String> newSeat = new ArrayList<String>(2);
+                            newSeat.add(userId);
+                            newSeat.add(flightData.get("seat_number"));
+                            seatsSoFar.add(newSeat);
                         } else {
                             flightInfo = flightInfos.get(0);
                             seatsSoFar = flightInfo.getSeats();
-                            if (seatsSoFar == null) {
-                                seatsSoFar = new ArrayList<List<String>>();
-                            } else {
-                                for (int i = 0; i < seatsSoFar.size(); i ++) {
-                                    List<String> seatItem = seatsSoFar.get(i);
-                                    if (seatItem.get(0).equals(userId)) {
-                                        userExists = true;
-                                        break;
-                                    }
+                            for (int i = 0; i < seatsSoFar.size(); i ++) {
+                                List<String> seatItem = seatsSoFar.get(i);
+                                if (seatItem.get(0).equals(userId)) {
+                                    userExists = true;
+                                    break;
                                 }
-                                if (!userExists) {
-                                    List<String> newSeat = new ArrayList<String>(2);
-                                    newSeat.add(userId);
-                                    newSeat.add(flightData.get("seat_number"));
-                                    seatsSoFar.add(newSeat);
-                                }
+                            }
+                            if (!userExists) {
+                                List<String> newSeat = new ArrayList<String>(2);
+                                newSeat.add(userId);
+                                newSeat.add(flightData.get("seat_number"));
+                                seatsSoFar.add(newSeat);
                             }
                         }
                         if (userExists) {

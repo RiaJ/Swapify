@@ -6,12 +6,16 @@
     <TextView
         android:id="@+id/flight_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="20dp"/>
     <TextView
         android:id="@+id/equipment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_info"/>
+        android:layout_below="@+id/flight_info"
+        android:paddingLeft="10dp"
+        android:text="12dp"/>
 
     <LinearLayout
         android:id="@+id/flight_info_block"
@@ -25,21 +29,36 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"
+                android:text="Departure"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/dep_iata"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/dep_city"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dep_iata"/>
+                android:layout_below="@+id/dep_iata"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/dep_time"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dep_city" />
+                android:layout_below="@+id/dep_city"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -48,29 +67,50 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_toRightOf="@+id/departure_block">
+            android:layout_toRightOf="@+id/departure_block"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"
+                android:text="Arrival"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/arr_iata"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/arr_city"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/arr_iata"/>
+                android:layout_below="@+id/arr_iata"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/arr_time"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/arr_city" />
+                android:layout_below="@+id/arr_city"
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/confirm_button"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/flight_info_block"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/flight_info_block">
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 </RelativeLayout>
