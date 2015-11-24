@@ -1,18 +1,23 @@
 package swapify.com.swapify;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +38,6 @@ public class FlightActivity extends Activity {
 
         ParseObject.registerSubclass(FlightInfo.class);
 
-        //TODO:set userId here...
         setupFlightInfo();
     }
 
@@ -53,8 +57,74 @@ public class FlightActivity extends Activity {
                 startActivity(i);
             }
         });
+        flightInfoListView.setLongClickable(true);
+        flightInfoListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final FlightInfo selectedFlightInfo = flightInfoArrayList.get(position);
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
+                builder.setTitle("Delete flight " + selectedFlightInfo.getFlightNo() + "?")
+                        .setMessage(R.string.delete_user_flight_msg)
+                        .setPositiveButton(R.string.delete_user_flight_yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteFlightInfoForUser(selectedFlightInfo);
+                                flightListAdapter.notifyDataSetChanged(); // update adapter
+                            }
+                        })
+                        .setNegativeButton(R.string.delete_user_flight_no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //user cancelled flight delete
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                return true;
+            }
+        });
 
         retrieveFlightInfo();
+    }
+
+    private void deleteFlightInfoForUser(FlightInfo flightInfo) {
+        ParseQuery<FlightInfo> query = ParseQuery.getQuery("FlightInfo");
+        query.whereEqualTo("flightNo", flightInfo.getFlightNo());
+        query.getFirstInBackground(new GetCallback<FlightInfo>() {
+            @Override
+            public void done(FlightInfo flightInfo, ParseException e) {
+                if (e == null) {
+                    List<List<String>> seats = flightInfo.getSeats();
+                    List<List<String>> newSeats = new ArrayList<List<String>>();;
+                    if (seats.size() > 1) {
+                        for (int i = 0; i < seats.size(); i++) {
+                            List<String> seat = seats.get(i);
+                            if (!seat.get(0).equals( ParseUser.getCurrentUser().getObjectId())) {
+                                newSeats.add(seat);
+                            }
+                        }
+                        flightInfo.setSeats(newSeats);
+                        flightInfo.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    retrieveFlightInfo();
+                                } else {
+                                    Toast.makeText(FlightActivity.this, "Delete not successful!", Toast.LENGTH_SHORT).show();
+                                    Log.d("ParseException", e.toString());
+                                }
+                            }
+                        });
+                    } else {
+                        flightInfo.deleteInBackground();
+                    }
+                } else {
+                    Log.d("Parse Exception", e.toString());
+                }
+            }
+        });
     }
 
     private void retrieveFlightInfo() {

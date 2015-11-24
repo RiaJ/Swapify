@@ -144,13 +144,13 @@ public class ScanQRCodeActivity extends Activity{
     }
 
     private void addFlight(String carrier, String flightNo, String seatNo, Calendar c) {
-//        String year = Integer.toString(c.get(Calendar.YEAR));
-//        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-//        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+        String year = Integer.toString(c.get(Calendar.YEAR));
+        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
+        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
 
-        String year = Integer.toString(2015);
-        String month = Integer.toString(11);
-        String day = Integer.toString(24);
+//        String year = Integer.toString(2015);
+//        String month = Integer.toString(11);
+//        String day = Integer.toString(24);
 
         String APIRequestString = Flight_Stats_Base_URI
                 + "schedules/rest/v1/json/flight/"
