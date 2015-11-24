@@ -5,13 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:id="@+id/flight_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LX2015"
+        android:textSize="30sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"/>
+    <TextView
         android:id="@+id/my_seat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/my_seat_fmt"
         android:textSize="30sp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/flight_display"/>
     <ListView
         android:id="@+id/passengersListView"
         android:transcriptMode="alwaysScroll"
