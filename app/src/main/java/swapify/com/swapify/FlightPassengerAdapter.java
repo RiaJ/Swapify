@@ -4,6 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +28,12 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +71,8 @@ public class FlightPassengerAdapter extends ArrayAdapter<List<String>> {
                 if (e == null) {
                     holder.passengerName.setText(objects.get(0).getUsername());
                     holder.seatNo.setText(seat);
+                    new AsyncUploadImage(holder.profileImg).
+                            execute(objects.get(0).getString("profileImg"));
 
                     holder.swapButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -125,5 +138,55 @@ public class FlightPassengerAdapter extends ArrayAdapter<List<String>> {
         public TextView passengerName;
         public TextView seatNo;
         public Button swapButton;
+    }
+
+    public static class AsyncUploadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView iv;
+        private HttpURLConnection connection;
+        private InputStream is;
+        private Bitmap bitmap;
+
+        public AsyncUploadImage(ImageView mImageView) {
+            iv = mImageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            URL url;
+            try {
+                url = new URL(urls[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setUseCaches(true);
+                connection.connect();
+                is = connection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(is);
+                is.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (is != null) {
+                        is.close();
+                    }
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            if (null != result) {
+                iv.setImageBitmap(result);
+            } else {
+                iv.setBackgroundResource(R.mipmap.ic_launcher);
+            }
+        }
     }
 }

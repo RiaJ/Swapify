@@ -36,6 +36,8 @@ public class HomeActivity extends Activity {
 
     private static String userId;
 
+    private static String facebookId;
+
     private LoginButton loginButton;
 
     @Override
@@ -107,6 +109,11 @@ public class HomeActivity extends Activity {
                                     response.getError();
                                     Log.e("JSON:", object.toString());
                                     try {
+                                        facebookId = object.getString("id");
+                                        String url = "https://graph.facebook.com/"
+                                                + facebookId
+                                                + "/picture?width=200&height=200";
+                                        user.put("profileImg", url);
                                         user.setUsername(object.getString("name"));
                                         user.saveInBackground();
                                     } catch (JSONException e) {
