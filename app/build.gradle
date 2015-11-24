@@ -31,6 +31,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'http://maven.livotovlabs.pro/content/groups/public' }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -41,6 +45,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
     compile 'com.parse.bolts:bolts-android:1.+'
+    compile ('eu.livotov.labs:camview:2.0.0.DEV5-SNAPSHOT@aar') {transitive=true}
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile fileTree(dir: 'libs', include: 'joda-time:2.9.jar')
 

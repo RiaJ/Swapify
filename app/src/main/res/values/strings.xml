@@ -13,6 +13,7 @@
     <string name="title_activity_add_flight">AddFlightActivity</string>
     <string name="title_activity_flight">FlightActivity</string>
     <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_scan_qr_activity">ScanQRCodeActivity</string>
 
     <string name="flight_no">Flight No.</string>
     <string name="carrier">Carrier</string>
@@ -56,4 +57,6 @@
 
     <string name="select_date">Select your departure date</string>
     <string name="date_selected"></string>
+    <string name="scan_qr">Scan QR Code</string>
+    <string name="scan_qr_cancel">Cancel</string>
 </resources>
