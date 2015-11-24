@@ -9,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;
@@ -53,7 +57,20 @@ public class ChatListAdapter extends ArrayAdapter<List<String>> {
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
         }
         final ImageView profileView = isMe ? holder.imageRight : holder.imageLeft;
-        Picasso.with(getContext()).load(getProfileUrl(message.get(0))).into(profileView);
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("objectId", message.get(0));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    Picasso.with(getContext()).load(objects.get(0).
+                            getString("profileImg")).into(profileView);
+                    // The query was successful.
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });
         holder.body.setText(message.get(1));
         return convertView;
     }

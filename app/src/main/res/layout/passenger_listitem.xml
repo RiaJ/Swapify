@@ -10,12 +10,13 @@
         android:contentDescription="@string/profile_other"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginLeft="20dp"/>
 
     <LinearLayout
         android:layout_height="64dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
         android:weightSum="4">
         <LinearLayout
             android:layout_height="64dp"
