@@ -4,13 +4,27 @@
     android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/show_flights_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2D45A3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Active Flights"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:padding="15dp"/>
+    </LinearLayout>
     <ListView
         android:id="@+id/flightsListView"
         android:transcriptMode="alwaysScroll"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/llSend"
+        android:layout_below="@id/show_flights_block"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
     <RelativeLayout

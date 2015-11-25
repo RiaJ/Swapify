@@ -50,6 +50,9 @@ public class ScanQRCodeActivity extends Activity{
     private static String Flight_Stats_Base_URI = "https://api.flightstats.com/flex/";
 
     private ScannerLiveView camera;
+    private static String Airline_Logo_Url_Prefix = "http://d3o54sf0907rz4.cloudfront.net/airline-logos/"
+            + "v2/centered/logos/png/300x100/";
+    private static String Airline_Logo_Url_Append = "-logo.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +154,7 @@ public class ScanQRCodeActivity extends Activity{
 
 //        String year = Integer.toString(2015);
 //        String month = Integer.toString(11);
-//        String day = Integer.toString(24);
+//        String day = Integer.toString(25);
 
         String APIRequestString = Flight_Stats_Base_URI
                 + "schedules/rest/v1/json/flight/"
@@ -264,6 +267,7 @@ public class ScanQRCodeActivity extends Activity{
                 flightData.put("flightNumber", scheduledFlights.getString("carrierFsCode") + scheduledFlights.getString("flightNumber"));
                 flightData.put("equipment", jsonObject.getJSONObject("appendix").getJSONArray("equipments").getJSONObject(0).getString("name"));
 
+                flightData.put("dep_date", departureTime.getDayOfMonth() + "/" + departureTime.getMonthOfYear() + "/" + departureTime.getYear());
                 flightData.put("dep_iata", departureAirport.getString("iata"));
                 flightData.put("dep_city", departureAirport.getString("city"));
                 flightData.put("dep_time", departureTime.getHourOfDay() + ":" + departureTime.getMinuteOfHour());
@@ -326,6 +330,16 @@ public class ScanQRCodeActivity extends Activity{
                         flightInfo = new FlightInfo();
                         flightInfo.setFlightNo(flightData.get("flightNumber"));
                         flightInfo.setEquipment(flightData.get("equipment"));
+                        flightInfo.setDepartureCity(flightData.get("dep_city"));
+                        flightInfo.setDepartureIATA(flightData.get("dep_iata"));
+                        flightInfo.setArrivalCity(flightData.get("arr_city"));
+                        flightInfo.setArrivalIATA(flightData.get("arr_iata"));
+                        flightInfo.setDepartureDate(flightData.get("dep_date"));
+                        flightInfo.setTakeOffTime(flightData.get("dep_time"));
+                        String logoUrl = Airline_Logo_Url_Prefix
+                                + flightData.get("flightNumber").substring(0, 2).toLowerCase()
+                                + Airline_Logo_Url_Append;
+                        flightInfo.setLogo(logoUrl);
                         seatsSoFar = new ArrayList<List<String>>();
                         List<String> newSeat = new ArrayList<String>(2);
                         newSeat.add(userId);

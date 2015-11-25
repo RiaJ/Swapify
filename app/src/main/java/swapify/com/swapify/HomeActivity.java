@@ -2,6 +2,7 @@ package swapify.com.swapify;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -49,6 +50,8 @@ public class HomeActivity extends Activity {
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, SWAPIFY_APPLICATION_ID, SWAPIFY_CLIENT_KEY);
         ParseFacebookUtils.initialize(this);
+
+
 
         // facebook login
         loginButton = (LoginButton)findViewById(R.id.login_button);

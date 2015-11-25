@@ -245,6 +245,7 @@ public class AddFlightActivity extends FragmentActivity{
                 flightData.put("flightNumber", scheduledFlights.getString("carrierFsCode") + scheduledFlights.getString("flightNumber"));
                 flightData.put("equipment", jsonObject.getJSONObject("appendix").getJSONArray("equipments").getJSONObject(0).getString("name"));
 
+                flightData.put("dep_date", departureTime.getDayOfMonth() + "/" + departureTime.getMonthOfYear() + "/" + departureTime.getYear());
                 flightData.put("dep_iata", departureAirport.getString("iata"));
                 flightData.put("dep_city", departureAirport.getString("city"));
                 flightData.put("dep_time", departureTime.getHourOfDay() + ":" + departureTime.getMinuteOfHour());
@@ -352,6 +353,7 @@ public class AddFlightActivity extends FragmentActivity{
             ParseQuery query = new ParseQuery("FlightInfo");
             query.whereEqualTo("flightNo", flightData.get("flightNumber"));
             Log.d("flightNum", flightData.get("flightNumber"));
+            Log.d("flightData", flightData.toString());
             query.findInBackground(new FindCallback<FlightInfo>() {
                 public void done(List<FlightInfo> flightInfos, ParseException e) {
                     if (e == null) {
@@ -363,6 +365,12 @@ public class AddFlightActivity extends FragmentActivity{
                             flightInfo = new FlightInfo();
                             flightInfo.setFlightNo(flightData.get("flightNumber"));
                             flightInfo.setEquipment(flightData.get("equipment"));
+                            flightInfo.setDepartureCity(flightData.get("dep_city"));
+                            flightInfo.setDepartureIATA(flightData.get("dep_iata"));
+                            flightInfo.setArrivalCity(flightData.get("arr_city"));
+                            flightInfo.setArrivalIATA(flightData.get("arr_iata"));
+                            flightInfo.setDepartureDate(flightData.get("dep_date"));
+                            flightInfo.setTakeOffTime(flightData.get("dep_time"));
                             String logoUrl = Airline_Logo_Url_Prefix
                                     + flightData.get("flightNumber").substring(0, 2).toLowerCase()
                                     + Airline_Logo_Url_Append;
@@ -375,7 +383,7 @@ public class AddFlightActivity extends FragmentActivity{
                         } else {
                             flightInfo = flightInfos.get(0);
                             seatsSoFar = flightInfo.getSeats();
-                            for (int i = 0; i < seatsSoFar.size(); i ++) {
+                            for (int i = 0; i < seatsSoFar.size(); i++) {
                                 List<String> seatItem = seatsSoFar.get(i);
                                 if (seatItem.get(0).equals(userId)) {
                                     userExists = true;

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -28,8 +30,10 @@ public class FlightListAdapter extends ArrayAdapter<FlightInfo> {
                     inflate(R.layout.flight_listitem, parent, false);
             final ViewHolder holder = new ViewHolder();
             holder.airlineLogoImg = (ImageView)convertView.findViewById(R.id.airlineLogo);
-
             holder.flightNo = (TextView)convertView.findViewById(R.id.flightNumber);
+            holder.route_info = (TextView)convertView.findViewById(R.id.route_info);
+            holder.flight_date_time = (TextView)convertView.findViewById(R.id.flight_date_time);
+
             convertView.setTag(holder);
         }
         final FlightInfo flightInfo = getItem(position);
@@ -37,11 +41,25 @@ public class FlightListAdapter extends ArrayAdapter<FlightInfo> {
 
         Picasso.with(getContext()).load(flightInfo.getLogo()).into(holder.airlineLogoImg);
         holder.flightNo.setText(flightInfo.getFlightNo());
+        holder.route_info.setText(flightInfo.getDepartureCity()
+                + " ("
+                + flightInfo.getDepartureIATA()
+                + ") -> "
+                + flightInfo.getArrivalCity()
+                + " ("
+                + flightInfo.getArrivalIATA()
+                + ")");
+        holder.flight_date_time.setText(flightInfo.getDepartureDate()
+                + " - "
+                + flightInfo.getTakeOffTime());
+
         return convertView;
     }
 
     final class ViewHolder {
         public ImageView airlineLogoImg;
         public TextView flightNo;
+        public TextView route_info;
+        public TextView flight_date_time;
     }
 }

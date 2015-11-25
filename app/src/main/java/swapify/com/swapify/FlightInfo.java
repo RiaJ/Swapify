@@ -17,13 +17,30 @@ public class FlightInfo extends ParseObject {
         return getString("equipment");
     }
 
+    public String getDepartureDate() {
+        return getString("departureDate");
+    }
+
     public String getTakeOffTime() {
         return getString("takeOffTime");
     }
 
-    public String getSeatMap() {
-        return getString("seatMap");
+    public String getDepartureCity() {
+        return getString("departureCity");
     }
+
+    public String getDepartureIATA() {
+        return getString("departureIATA");
+    }
+
+    public String getArrivalCity() {
+        return getString("arrivalCity");
+    }
+
+    public String getArrivalIATA() {
+        return getString("arrivalIATA");
+    }
+
 
     public String getLogo() {
         return getString("logo");
@@ -41,12 +58,28 @@ public class FlightInfo extends ParseObject {
         put("equipment", equipment);
     }
 
+    public void setDepartureDate(String departureDate) {
+        put("departureDate", departureDate);
+    }
+
     public void setTakeOffTime(String takeOffTime) {
         put("takeOffTime", takeOffTime);
     }
 
-    public void setSeatMap(String seatMap) {
-        put("seatMap", seatMap);
+    public void setDepartureCity(String departureCity) {
+        put("departureCity", departureCity);
+    }
+
+    public void setDepartureIATA(String departureIATA) {
+        put("departureIATA", departureIATA);
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        put("arrivalCity", arrivalCity);
+    }
+
+    public void setArrivalIATA(String arrivalIATA) {
+        put("arrivalIATA", arrivalIATA);
     }
 
     public void setLogo(String logo) {
