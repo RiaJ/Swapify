@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:id="@+id/add_flight_and_current_flights"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
@@ -29,21 +29,21 @@
 
             <Button
                 android:id="@+id/add_flight_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/add_flight" />
 
             <Button
                 android:id="@+id/current_flights_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/current_flights" />
 
             <Button
                 android:id="@+id/swap_requests_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/swap_requests" />
