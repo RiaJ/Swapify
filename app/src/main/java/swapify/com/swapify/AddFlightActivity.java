@@ -55,6 +55,9 @@ public class AddFlightActivity extends FragmentActivity{
     private static Integer DATARETRIEVAL_TIMEOUT = 15000;
 
     private static String Flight_Stats_Base_URI = "https://api.flightstats.com/flex/";
+    private static String Airline_Logo_Url_Prefix = "http://d3o54sf0907rz4.cloudfront.net/airline-logos/"
+            + "v2/centered/logos/png/300x100/";
+    private static String Airline_Logo_Url_Append = "-logo.png";
 
     private EditText dateEditView;
     public static Calendar mCalendar;
@@ -336,7 +339,6 @@ public class AddFlightActivity extends FragmentActivity{
 
         private void saveFlightInfo(Map<String, String> flightInfo) {
             final Map<String, String> flightData = flightInfo;
-
             ParseQuery query = new ParseQuery("FlightInfo");
             query.whereEqualTo("flightNo", flightData.get("flightNumber"));
             Log.d("flightNum", flightData.get("flightNumber"));
@@ -351,6 +353,10 @@ public class AddFlightActivity extends FragmentActivity{
                             flightInfo = new FlightInfo();
                             flightInfo.setFlightNo(flightData.get("flightNumber"));
                             flightInfo.setEquipment(flightData.get("equipment"));
+                            String logoUrl = Airline_Logo_Url_Prefix
+                                    + flightData.get("flightNumber").substring(0, 2).toLowerCase()
+                                    + Airline_Logo_Url_Append;
+                            flightInfo.setLogo(logoUrl);
                             seatsSoFar = new ArrayList<List<String>>();
                             List<String> newSeat = new ArrayList<String>(2);
                             newSeat.add(userId);

@@ -1,6 +1,7 @@
 package swapify.com.swapify;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class FlightListAdapter extends ArrayAdapter<FlightInfo> {
                     inflate(R.layout.flight_listitem, parent, false);
             final ViewHolder holder = new ViewHolder();
             holder.airlineLogoImg = (ImageView)convertView.findViewById(R.id.airlineLogo);
+
             holder.flightNo = (TextView)convertView.findViewById(R.id.flightNumber);
             convertView.setTag(holder);
         }
