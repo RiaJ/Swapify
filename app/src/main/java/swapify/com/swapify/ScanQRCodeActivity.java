@@ -62,6 +62,7 @@ public class ScanQRCodeActivity extends Activity{
                 camera.stopScanner();
                 Intent i = new Intent(ScanQRCodeActivity.this, AddFlightActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -144,13 +145,13 @@ public class ScanQRCodeActivity extends Activity{
     }
 
     private void addFlight(String carrier, String flightNo, String seatNo, Calendar c) {
-//        String year = Integer.toString(c.get(Calendar.YEAR));
-//        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-//        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+        String year = Integer.toString(c.get(Calendar.YEAR));
+        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
+        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
 
-        String year = Integer.toString(2015);
-        String month = Integer.toString(11);
-        String day = Integer.toString(24);
+//        String year = Integer.toString(2015);
+//        String month = Integer.toString(11);
+//        String day = Integer.toString(24);
 
         String APIRequestString = Flight_Stats_Base_URI
                 + "schedules/rest/v1/json/flight/"
@@ -388,12 +389,14 @@ public class ScanQRCodeActivity extends Activity{
                     public void onClick(DialogInterface dialog, int id) {
                         Intent i = new Intent(ScanQRCodeActivity.this, FlightActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 })
                 .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent i = new Intent(ScanQRCodeActivity.this, AddFlightActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 });
 

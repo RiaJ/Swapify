@@ -56,6 +56,8 @@ public class FlightPassengerActivity extends Activity {
         passengerInfoListView = (ListView) findViewById(R.id.passengersListView);
         passengerInfoList = new ArrayList<>();
 
+        final TextView flightNoTitle = (TextView) findViewById(R.id.flight_display);
+
         passengerInfoListView.setTranscriptMode(1);
         flightPassengerListAdapter = new FlightPassengerAdapter(FlightPassengerActivity.this, passengerInfoList);
         passengerInfoListView.setAdapter(flightPassengerListAdapter);
@@ -68,6 +70,9 @@ public class FlightPassengerActivity extends Activity {
             public void done(List<FlightInfo> flightInfos, ParseException e) {
                 if (e == null) {
                     FlightInfo currentFlightInfo = flightInfos.get(0);
+
+                    flightNoTitle.setText(currentFlightInfo.getFlightNo());
+
                     String myId = ParseUser.getCurrentUser().getObjectId();
                     List<List<String>> seats = currentFlightInfo.getSeats();
                     List<List<String>> filteredSeats = filterSeats(seats, myId);
