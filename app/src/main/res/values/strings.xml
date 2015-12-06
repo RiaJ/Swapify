@@ -66,4 +66,5 @@
     <string name="sample_route"><![CDATA[Toronto (YYZ) -> Ottawa (YUZ)]]></string>
     <string name="sample_time">Jan. 4, 2015 - 4:50 PM</string>
     <string name="active_request">Active Requests</string>
+    <string name="logout">Are you sure you want to log out?</string>
 </resources>

@@ -11,12 +11,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,9 +73,18 @@ public class AddFlightActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_flight);
+        setContentView(R.layout.activity_navigation_drawer_list_factory);
 
         ParseObject.registerSubclass(FlightInfo.class);
+
+        View navDrawerView = getLayoutInflater().inflate(
+                R.layout.activity_navigation_drawer_list_factory, null);
+        FrameLayout mainContentFrame = (FrameLayout) findViewById(R.id.main_content_frame);
+        View addFlightView = getLayoutInflater().inflate(R.layout.activity_add_flight, null);
+        mainContentFrame.addView(addFlightView);
+        ListView navDrawerList = (ListView) findViewById(R.id.nav_drawer);
+        NavigationDrawerListFactory navDrawerListFactory =
+                new NavigationDrawerListFactory(navDrawerList, navDrawerView.getContext(), this);
 
         dateEditView = (EditText) findViewById(R.id.date_chooser_text_edit);
         mCalendar = Calendar.getInstance();
@@ -124,6 +138,15 @@ public class AddFlightActivity extends FragmentActivity{
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 
     private void checkAgainstFlightSchedule(TempFlightInfo flightInfo) {

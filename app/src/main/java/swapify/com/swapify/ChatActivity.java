@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -50,12 +53,30 @@ public class ChatActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_navigation_drawer_list_factory);
 
         ParseObject.registerSubclass(Chat.class);
 
+        View navDrawerView = getLayoutInflater().inflate(
+                R.layout.activity_navigation_drawer_list_factory, null);
+        FrameLayout mainContentFrame = (FrameLayout) findViewById(R.id.main_content_frame);
+        View chatView = getLayoutInflater().inflate(R.layout.activity_chat, null);
+        mainContentFrame.addView(chatView);
+        ListView navDrawerList = (ListView) findViewById(R.id.nav_drawer);
+        NavigationDrawerListFactory navDrawerListFactory =
+                new NavigationDrawerListFactory(navDrawerList, navDrawerView.getContext(), this);
+
         setupMessagePosting();
         handler.postDelayed(runnable, 100);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 
     // Defines a runnable which is run every 100ms

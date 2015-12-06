@@ -53,6 +53,8 @@
             android:name=".ScanQRCodeActivity"
             android:label="@string/title_scan_qr_activity" >
         </activity>
+        <activity android:name=".NavigationDrawerListFactory" >
+        </activity>
     </application>
 
 </manifest>

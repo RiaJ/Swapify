@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,8 +39,17 @@ public class FlightPassengerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listpassengers);
+        setContentView(R.layout.activity_navigation_drawer_list_factory);
         ParseObject.registerSubclass(FlightInfo.class);
+
+        View navDrawerView = getLayoutInflater().inflate(
+                R.layout.activity_navigation_drawer_list_factory, null);
+        FrameLayout mainContentFrame = (FrameLayout) findViewById(R.id.main_content_frame);
+        View passengerView = getLayoutInflater().inflate(R.layout.activity_listpassengers, null);
+        mainContentFrame.addView(passengerView);
+        ListView navDrawerList = (ListView) findViewById(R.id.nav_drawer);
+        NavigationDrawerListFactory navDrawerListFactory =
+                new NavigationDrawerListFactory(navDrawerList, navDrawerView.getContext(), this);
 
         setupFlightInfo();
 
@@ -50,6 +62,15 @@ public class FlightPassengerActivity extends Activity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 
     private void setupFlightInfo() {

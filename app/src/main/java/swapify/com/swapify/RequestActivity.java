@@ -5,11 +5,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -34,12 +37,30 @@ public class RequestActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listrequests);
+        setContentView(R.layout.activity_navigation_drawer_list_factory);
 
         ParseObject.registerSubclass(FlightInfo.class);
         ParseObject.registerSubclass(SwapRequest.class);
 
+        View navDrawerView = getLayoutInflater().inflate(
+                R.layout.activity_navigation_drawer_list_factory, null);
+        FrameLayout mainContentFrame = (FrameLayout) findViewById(R.id.main_content_frame);
+        View swapRequestView = getLayoutInflater().inflate(R.layout.activity_listrequests, null);
+        mainContentFrame.addView(swapRequestView);
+        ListView navDrawerList = (ListView) findViewById(R.id.nav_drawer);
+        NavigationDrawerListFactory navDrawerListFactory =
+                new NavigationDrawerListFactory(navDrawerList, navDrawerView.getContext(), this);
+
         setupSwapRequest();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 
     private void setupSwapRequest() {
