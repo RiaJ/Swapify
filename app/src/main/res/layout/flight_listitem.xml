@@ -8,7 +8,9 @@
         android:contentDescription="@string/profile_other"
         android:layout_width="192dp"
         android:layout_height="64dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
     <TextView
         android:textSize="18sp"
         android:id="@+id/flightNumber"
@@ -30,7 +32,7 @@
             android:textSize="16sp"
             android:padding="5dp"
             android:gravity="end"
-            android:text="Toronto (YYZ) -> Ottawa (YUZ)"/>
+            android:text="@string/sample_route"/>
         <TextView
             android:id="@+id/flight_date_time"
             android:layout_width="match_parent"
@@ -38,6 +40,6 @@
             android:textSize="12sp"
             android:padding="5dp"
             android:gravity="end"
-            android:text="Jan. 4, 2015 - 4:50 PM"/>
+            android:text="@string/sample_time"/>
     </LinearLayout>
 </LinearLayout>

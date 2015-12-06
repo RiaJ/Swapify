@@ -63,4 +63,7 @@
     <string name="delete_user_flight_msg">Are you sure you want to delete this flight?</string>
     <string name="delete_user_flight_yes">Yes</string>
     <string name="delete_user_flight_no">No</string>
+    <string name="sample_route"><![CDATA[Toronto (YYZ) -> Ottawa (YUZ)]]></string>
+    <string name="sample_time">Jan. 4, 2015 - 4:50 PM</string>
+    <string name="active_request">Active Requests</string>
 </resources>

@@ -9,7 +9,10 @@
         android:textSize="18sp"
         android:id="@+id/request_username"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_weight="2">
     </TextView>
 
@@ -17,7 +20,9 @@
         android:textSize="18sp"
         android:id="@+id/request_flight_no"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1">
     </TextView>
 
@@ -25,8 +30,11 @@
         android:textSize="18sp"
         android:id="@+id/request_seat"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp">
     </TextView>
 
 </LinearLayout>

@@ -10,7 +10,9 @@
         android:contentDescription="@string/profile_other"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <LinearLayout
         android:layout_height="64dp"
