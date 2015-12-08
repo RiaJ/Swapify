@@ -5,9 +5,6 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
-/**
- * Created by Thomas on 2015-11-15.
- */
 @ParseClassName("Chat")
 public class Chat extends ParseObject {
     public String getUserOneId() {

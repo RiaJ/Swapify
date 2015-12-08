@@ -3,9 +3,7 @@ package swapify.com.swapify;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
-import java.math.BigInteger;
 import java.util.List;
-import java.util.Map;
 
 @ParseClassName("FlightInfo")
 public class FlightInfo extends ParseObject {
@@ -40,7 +38,6 @@ public class FlightInfo extends ParseObject {
     public String getArrivalIATA() {
         return getString("arrivalIATA");
     }
-
 
     public String getLogo() {
         return getString("logo");

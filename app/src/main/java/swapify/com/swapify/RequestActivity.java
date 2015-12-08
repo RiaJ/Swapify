@@ -2,6 +2,7 @@ package swapify.com.swapify;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -50,6 +53,11 @@ public class RequestActivity extends FragmentActivity {
         ListView navDrawerList = (ListView) findViewById(R.id.nav_drawer);
         NavigationDrawerListFactory navDrawerListFactory =
                 new NavigationDrawerListFactory(navDrawerList, navDrawerView.getContext(), this);
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(Color.parseColor("#303F9F"));
 
         setupSwapRequest();
     }
@@ -202,26 +210,7 @@ public class RequestActivity extends FragmentActivity {
                             deleteReq(Integer.valueOf(args.get(5)), true);
                         }
                     });
-            final AlertDialog inReqDialog = builder.create();
-            inReqDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface d) {
-                    Button posButton = inReqDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                    Button negButton = inReqDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-
-                    LinearLayout.LayoutParams posParams =
-                            (LinearLayout.LayoutParams) posButton.getLayoutParams();
-                    posParams.weight = 1;
-
-                    LinearLayout.LayoutParams negParams =
-                            (LinearLayout.LayoutParams) negButton.getLayoutParams();
-                    negParams.weight = 1;
-
-                    posButton.setLayoutParams(posParams);
-                    negButton.setLayoutParams(negParams);
-                }
-            });
-            return inReqDialog;
+            return builder.create();
         }
     }
 
@@ -241,26 +230,7 @@ public class RequestActivity extends FragmentActivity {
                             dialog.cancel();
                         }
                     });
-            final AlertDialog outReqDialog = builder.create();
-            outReqDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface d) {
-                    Button posButton = outReqDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                    Button negButton = outReqDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-
-                    LinearLayout.LayoutParams posParams =
-                            (LinearLayout.LayoutParams) posButton.getLayoutParams();
-                    posParams.weight = 1;
-
-                    LinearLayout.LayoutParams negParams =
-                            (LinearLayout.LayoutParams) negButton.getLayoutParams();
-                    negParams.weight = 1;
-
-                    posButton.setLayoutParams(posParams);
-                    negButton.setLayoutParams(negParams);
-                }
-            });
-            return outReqDialog;
+            return builder.create();
         }
     }
 }

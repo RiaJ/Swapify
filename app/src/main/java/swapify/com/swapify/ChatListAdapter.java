@@ -17,12 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thomas on 2015-11-13.
- */
 public class ChatListAdapter extends ArrayAdapter<List<String>> {
     private String mUserId;
 
@@ -37,13 +33,13 @@ public class ChatListAdapter extends ArrayAdapter<List<String>> {
             convertView = LayoutInflater.from(getContext()).
                     inflate(R.layout.chat_listitem, parent, false);
             final ViewHolder holder = new ViewHolder();
-            holder.imageLeft = (ImageView)convertView.findViewById(R.id.ivProfileLeft);
-            holder.imageRight = (ImageView)convertView.findViewById(R.id.ivProfileRight);
-            holder.body = (TextView)convertView.findViewById(R.id.tvBody);
+            holder.imageLeft = (ImageView) convertView.findViewById(R.id.ivProfileLeft);
+            holder.imageRight = (ImageView) convertView.findViewById(R.id.ivProfileRight);
+            holder.body = (TextView) convertView.findViewById(R.id.tvBody);
             convertView.setTag(holder);
         }
         List<String> message = getItem(position);
-        final ViewHolder holder = (ViewHolder)convertView.getTag();
+        final ViewHolder holder = (ViewHolder) convertView.getTag();
         final boolean isMe = message.get(0).equals(mUserId);
         // Show-hide image based on the logged-in user.
         // Display the profile image to the right for our user, left for other users.

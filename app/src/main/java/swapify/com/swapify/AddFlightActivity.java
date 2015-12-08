@@ -16,7 +16,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -55,7 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class AddFlightActivity extends FragmentActivity{
+public class AddFlightActivity extends FragmentActivity {
     private static Integer CONNECTION_TIMEOUT = 15000;
     private static Integer DATARETRIEVAL_TIMEOUT = 15000;
 
@@ -144,7 +143,7 @@ public class AddFlightActivity extends FragmentActivity{
     protected void onResume() {
         super.onResume();
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -191,7 +190,7 @@ public class AddFlightActivity extends FragmentActivity{
         dateFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    private class FlightStatsService extends AsyncTask<String, Integer, JSONObject>{
+    private class FlightStatsService extends AsyncTask<String, Integer, JSONObject> {
         private TempFlightInfo flightInfo;
 
         //override constructor
@@ -251,7 +250,7 @@ public class AddFlightActivity extends FragmentActivity{
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            try{
+            try {
                 Log.d("JSON", jsonObject.toString());
                 JSONObject scheduledFlights = jsonObject.getJSONArray("scheduledFlights").getJSONObject(0);
                 HashMap<String, String> flightData = new HashMap<>();
@@ -323,6 +322,7 @@ public class AddFlightActivity extends FragmentActivity{
         public ConfirmFlightSelectionDialog(Map<String, String> flightInfo) {
             flightData = flightInfo;
         }
+
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {

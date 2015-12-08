@@ -3,7 +3,6 @@ package swapify.com.swapify;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -18,16 +17,11 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by Thomas on 2015-11-13.
- */
-public class ChatActivity extends Activity{
+public class ChatActivity extends Activity {
     private static final int MAX_MESSAGES = 50;
 
     private static final String TAG = "ChatActivity";
@@ -45,7 +39,6 @@ public class ChatActivity extends Activity{
 
     // Create a handler which can run code periodically
     private Handler handler = new Handler();
-
 
     private static String userOne = "";
     private static String userTwo = "";
@@ -74,7 +67,7 @@ public class ChatActivity extends Activity{
     protected void onResume() {
         super.onResume();
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -153,8 +146,6 @@ public class ChatActivity extends Activity{
     // Query messages from Parse so we can load them into the chat adapter
     private void receiveMessage() {
         // Construct query to execute
-//        ParseQuery<Chat> query = ParseQuery.getQuery(Chat.class);
-
         ParseQuery query = new ParseQuery("Chat");
         query.whereEqualTo("combinedUserId", combineUserIds(userOne, userTwo));
 
@@ -181,28 +172,6 @@ public class ChatActivity extends Activity{
                 }
             }
         });
-
-//        // Configure limit and sort order
-//        query.setLimit(MAX_MESSAGES);
-//        query.orderByAscending("createdAt");
-//        // Execute query to fetch all messages from Parse asynchronously
-//        // This is equivalent to a SELECT query with SQL
-//        query.findInBackground(new FindCallback<Message>() {
-//            public void done(List<Message> messages, ParseException e) {
-//                if (e == null) {
-//                    messageArrayList.clear();
-//                    messageArrayList.addAll(messages);
-//                    chatListAdapter.notifyDataSetChanged(); // update adapter
-//                    // Scroll to the bottom of the list on initial load
-//                    if (mFirstLoad) {
-//                        chatListView.setSelection(chatListAdapter.getCount() - 1);
-//                        mFirstLoad = false;
-//                    }
-//                } else {
-//                    Log.d("message", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
     }
 
     private String combineUserIds(String userOneId, String userTwoId) {

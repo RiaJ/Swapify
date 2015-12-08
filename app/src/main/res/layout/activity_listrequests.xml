@@ -14,6 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
             android:padding="15dp"
             android:text="@string/active_request"
             android:textColor="#fff"

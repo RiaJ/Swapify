@@ -22,13 +22,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thomas on 2015-11-15.
- */
 public class FlightActivity extends Activity {
     private ListView flightInfoListView;
     private List<FlightInfo> flightInfoArrayList;
@@ -57,7 +53,7 @@ public class FlightActivity extends Activity {
     protected void onResume() {
         super.onResume();
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -117,11 +113,12 @@ public class FlightActivity extends Activity {
             public void done(FlightInfo flightInfo, ParseException e) {
                 if (e == null) {
                     List<List<String>> seats = flightInfo.getSeats();
-                    List<List<String>> newSeats = new ArrayList<List<String>>();;
+                    List<List<String>> newSeats = new ArrayList<List<String>>();
+                    ;
                     if (seats.size() > 1) {
                         for (int i = 0; i < seats.size(); i++) {
                             List<String> seat = seats.get(i);
-                            if (!seat.get(0).equals( ParseUser.getCurrentUser().getObjectId())) {
+                            if (!seat.get(0).equals(ParseUser.getCurrentUser().getObjectId())) {
                                 newSeats.add(seat);
                             }
                         }

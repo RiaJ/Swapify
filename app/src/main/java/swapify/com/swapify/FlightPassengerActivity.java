@@ -2,17 +2,13 @@ package swapify.com.swapify;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,16 +17,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thomas on 2015-11-15.
- */
 public class FlightPassengerActivity extends Activity {
     private ListView passengerInfoListView;
     private List<List<String>> passengerInfoList;
@@ -68,7 +58,7 @@ public class FlightPassengerActivity extends Activity {
     protected void onResume() {
         super.onResume();
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -135,6 +125,6 @@ public class FlightPassengerActivity extends Activity {
                 passengersNotIncludingSelf.add(seats.get(i));
             }
         }
-        return  passengersNotIncludingSelf;
+        return passengersNotIncludingSelf;
     }
 }
