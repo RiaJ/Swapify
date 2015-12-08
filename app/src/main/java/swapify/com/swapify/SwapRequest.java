@@ -3,14 +3,8 @@ package swapify.com.swapify;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
-import java.util.List;
-
 @ParseClassName("SwapRequest")
 public class SwapRequest extends ParseObject {
-    public String getRequestKey() {
-        return getString("requestKey");
-    }
-
     public String getUserOneId() {
         return getString("userOneId");
     }
@@ -35,7 +29,7 @@ public class SwapRequest extends ParseObject {
         return getString("userTwoFlight");
     }
 
-    public void setRequestKey (String requestKey) {
+    public void setRequestKey(String requestKey) {
         put("requestKey", requestKey);
     }
 

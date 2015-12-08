@@ -28,9 +28,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-/**
- * Created by Thomas on 2015-11-15.
- */
 public class FlightPassengerAdapter extends ArrayAdapter<List<String>> {
     public FlightPassengerAdapter(Context context, List<List<String>> passengers) {
         super(context, 0, passengers);

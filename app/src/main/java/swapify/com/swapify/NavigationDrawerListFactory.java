@@ -3,7 +3,6 @@ package swapify.com.swapify;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,8 +33,8 @@ public class NavigationDrawerListFactory {
         profileName = (TextView) activity.findViewById(R.id.profile_name);
         setProfile();
 
-        String[] listViewItems = { LIST_ITEM_HOME, LIST_ITEM_ADD,
-                LIST_ITEM_FLIGHTS, LIST_ITEM_REQUESTS };
+        String[] listViewItems = {LIST_ITEM_HOME, LIST_ITEM_ADD,
+                LIST_ITEM_FLIGHTS, LIST_ITEM_REQUESTS};
         ArrayAdapter<String> navDrawerAdapter = new ArrayAdapter<String>(
                 context, android.R.layout.simple_list_item_1, listViewItems);
         navDrawerList.setAdapter(navDrawerAdapter);

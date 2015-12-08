@@ -2,7 +2,6 @@ package swapify.com.swapify;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -52,9 +51,8 @@ public class HomeActivity extends Activity {
         ParseFacebookUtils.initialize(this);
 
 
-
         // facebook login
-        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +81,7 @@ public class HomeActivity extends Activity {
                 startActivity(i);
             }
         });
+
     }
 
     private void onLoginButtonClicked() {
