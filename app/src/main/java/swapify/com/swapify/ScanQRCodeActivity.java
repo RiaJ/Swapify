@@ -40,10 +40,7 @@ import java.util.Scanner;
 
 import eu.livotov.labs.android.camview.ScannerLiveView;
 
-/**
- * Created by Thomas on 2015-11-24.
- */
-public class ScanQRCodeActivity extends Activity{
+public class ScanQRCodeActivity extends Activity {
     private static Integer CONNECTION_TIMEOUT = 15000;
     private static Integer DATARETRIEVAL_TIMEOUT = 15000;
 
@@ -109,7 +106,7 @@ public class ScanQRCodeActivity extends Activity{
                 String carrierStartInfo = airportStartInfo.substring(6, airportStartInfo.length());
                 String flightInfo = carrierStartInfo.substring(0, 7);
 
-                String[] flightInfoArray = flightInfo.replaceAll("\\s","").split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+                String[] flightInfoArray = flightInfo.replaceAll("\\s", "").split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
 
                 String carrier = flightInfoArray[0];
                 String flightNo = flightInfoArray[1];
@@ -151,10 +148,6 @@ public class ScanQRCodeActivity extends Activity{
         String year = Integer.toString(c.get(Calendar.YEAR));
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
-
-//        String year = Integer.toString(2015);
-//        String month = Integer.toString(11);
-//        String day = Integer.toString(25);
 
         String APIRequestString = Flight_Stats_Base_URI
                 + "schedules/rest/v1/json/flight/"
@@ -250,7 +243,7 @@ public class ScanQRCodeActivity extends Activity{
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            try{
+            try {
                 Log.d("JSON", jsonObject.toString());
                 JSONObject scheduledFlights = jsonObject.getJSONArray("scheduledFlights").getJSONObject(0);
                 HashMap<String, String> flightData = new HashMap<>();
@@ -348,7 +341,7 @@ public class ScanQRCodeActivity extends Activity{
                     } else {
                         flightInfo = flightInfos.get(0);
                         seatsSoFar = flightInfo.getSeats();
-                        for (int i = 0; i < seatsSoFar.size(); i ++) {
+                        for (int i = 0; i < seatsSoFar.size(); i++) {
                             List<String> seatItem = seatsSoFar.get(i);
                             if (seatItem.get(0).equals(userId)) {
                                 userExists = true;

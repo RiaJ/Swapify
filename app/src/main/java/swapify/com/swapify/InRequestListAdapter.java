@@ -1,12 +1,10 @@
 package swapify.com.swapify;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -32,7 +30,7 @@ public class InRequestListAdapter extends ArrayAdapter<SwapRequest> {
             holder1.seatNo = (TextView) convertView.findViewById(R.id.request_seat);
             convertView.setTag(holder1);
             final SwapRequest request = getItem(position);
-            final ViewHolder holder2 = (ViewHolder)convertView.getTag();
+            final ViewHolder holder2 = (ViewHolder) convertView.getTag();
             String userId = request.getUserOneId();
             final String seat = request.getUserOneSeat();
             final String flight = request.getUserOneFlight();

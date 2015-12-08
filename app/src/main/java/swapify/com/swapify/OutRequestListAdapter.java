@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -34,7 +32,7 @@ public class OutRequestListAdapter extends ArrayAdapter<SwapRequest> {
             convertView.setTag(holder1);
             final SwapRequest request = getItem(position);
             Log.d("out adapter", request.getUserTwoId());
-            final ViewHolder holder2 = (ViewHolder)convertView.getTag();
+            final ViewHolder holder2 = (ViewHolder) convertView.getTag();
             String userId = request.getUserTwoId();
             final String seat = request.getUserTwoSeat();
             final String flight = request.getUserTwoFlight();
